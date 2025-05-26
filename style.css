@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: Nunito;
+    src: url(./resources/static/Nunito-Medium.ttf);
+}
+.main{
+    font-family:Nunito, sans-serif;
+    height:100vh;
+    background-color:beige;
+}
+.main h1{
+    display:flex;
+    justify-content: center;
+}
+.rules{
+    margin-top:20px;
+    margin-left:30px;
+}
+.game{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+    margin-top:20px;
+    margin-left:20px;
+}
+.play-button{
+    font-weight:bold;
+    border-radius:5px;
+    padding:10px 20px;
+    background-color:crimson;
+    color:white;
+    cursor:pointer;
+}
+.choice{
+   font-size:32px;
+   color:crimson; 
+}
