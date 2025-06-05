@@ -40,3 +40,9 @@
    font-size:32px;
    color:crimson; 
 }
+.buttons button{
+    padding:10px 20px;
+    font-size: 30px;
+    margin:10px;
+    cursor:pointer;
+}
