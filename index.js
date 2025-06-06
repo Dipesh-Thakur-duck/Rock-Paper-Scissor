@@ -1,50 +1,63 @@
+//user score and computer score is set to 0 at the start of the game
 let userScore = 0;
 let computerScore = 0;
 
 const playButton = document.querySelector('.play-button');
+
+//Div element which will contain the options is reference here
 const buttonDiv = document.querySelector('.buttons');
+
+const buttonRock = document.createElement('button');
+const buttonPaper = document.createElement('button');
+const buttonScissor = document.createElement('button');
 
 playButton.addEventListener('click',game);
 
 const decisionBoard = document.querySelector('.decisions');
+
 const userScoreBoard = document.querySelector('.user-score');
+
 const computerScoreBoard = document.querySelector('.computer-score');
 
+buttonDiv.addEventListener('click',(event)=>{
+    let target = event.target;
+
+    switch(target.id){
+        case 'rock':
+            userChoice = 3;
+            break;
+        case 'paper':
+            userChoice = 1;
+            break;
+        case 'scissor':
+            userChoice = 2;
+            break;
+    };
+
+    const computerChoice = Math.floor(Math.random() * 3) + 1;
+
+    display(userChoice, computerChoice);
+
+
+    let decision = result(userChoice,computerChoice);
+
+
+    scoreBoardUpdate(decision);
+
+})
+
 function game(){
-    if(playButton.innerText = 'Play Again?'){
+    if(playButton.innerText === 'Play Again?'){
         playButton.innerText = 'Play';
+        userScore = 0;
+        computerScore = 0;
+        userScoreBoard.innerHTML = `User-Score: ${userScore}`;
+        computerScoreBoard.innerHTML = `Computer-Score: ${computerScore}`;
     }
-    let userChoice = null;
     if(buttonDiv.innerHTML.trim() === ''){
         buttonCreation();
     }
 
-    buttonDiv.addEventListener('click',(event)=>{
-        let target = event.target;
-
-        switch(target.id){
-            case 'rock':
-                userChoice = 3;
-                break;
-            case 'paper':
-                userChoice = 1;
-                break;
-            case 'scissor':
-                userChoice = 2;
-                break;
-        };
-
-        const computerChoice = Math.floor(Math.random() * 3) + 1;
-
-        display(userChoice, computerChoice);
-
-
-        let decision = result(userChoice,computerChoice);
-
-
-        scoreBoardUpdate(decision);
-
-    })
 
 }
 
@@ -109,15 +122,10 @@ function scoreBoardUpdate(decision){
     
     if(userScore === 5 || computerScore === 5){
         gameComplete(userScore,computerScore);
-        userScore = 0;
-        computerScore = 0;
     }
 }
 
 function buttonCreation(){
-    const buttonRock = document.createElement('button');
-    const buttonPaper = document.createElement('button');
-    const buttonScissor = document.createElement('button');
 
     buttonRock.textContent = '✊';
     buttonPaper.textContent = '🖐️';
@@ -137,17 +145,19 @@ function gameComplete(userScore,computerScore){
     playButton.innerHTML = winnerText;
 
     playButton.disabled = true;
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissor.disabled = true;
 
     setTimeout(()=>{
         playButton.innerHTML = 'Play Again?'
         playButton.disabled = false;
     },3000)
-    userScore = 0;
-    computerScore = 0;
-    userScoreBoard.innerHTML = `User-Score: ${userScore}`;
-    computerScoreBoard.innerHTML = `Computer-Score: ${computerScore}`;
 
     playButton.onclick = ()=>{
+        buttonRock.disabled = false;
+        buttonPaper.disabled = false;
+        buttonScissor.disabled = false;
         game();
     };
 }
